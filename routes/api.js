@@ -36,7 +36,7 @@ router.post('/api/email', function (req, res, next) {
 			var msg = {
 			  from: 'Terminal Website <noreply@terminalem.com>',
 			  // to: ['ajalmaguer@gmail.com', 'rachel.terminal@gmail.com'],
-			  to: ['ajalmaguer@gmail.com', 'steve@terminalmanufacturing.com'],
+			  to: ['ajalmaguer@gmail.com'],
 			  subject: 'From terminalem.com: ' + data.subject,
 			  text: 'Name: ' +  data.name
 			  		+ '\n\nEmail: ' + data.email 
