@@ -24,22 +24,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // CORS
-var cors = require('cors')
-var whitelist = ['http://localhost:4200', 'http://terminalem.com', 'http://ajalmaguer.github.io'];
+var cors = require('cors');
+var whitelist = [process.env.DOMAIN];
 var corsOptions = {
-  origin: function(origin, callback){
+  origin: function (origin, callback) {
     var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
     callback(originIsWhitelisted ? null : 'Bad Request', originIsWhitelisted);
-  }
+  },
 };
-app.use(cors(corsOptions))
+app.use(cors(corsOptions));
 
 // Routes
 app.use('/', routes);
 
-
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -50,24 +49,23 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.json({
       message: err.message,
-      error: err
+      error: err,
     });
   });
 }
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.json({
     message: err.message,
-    error: {}
+    error: {},
   });
 });
-
 
 module.exports = app;
